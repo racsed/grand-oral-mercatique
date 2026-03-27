@@ -1768,8 +1768,7 @@ function InfoModal({ onClose }) {
 
         <div style={sH}>{"É"}diteur</div>
         <p style={sP}>
-          Rachid Seddar (M. SEDDAR)<br />
-          D{"é"}velopp{"é"} avec l'aide de <em>Claude AI</em> (Anthropic).
+          Rachid Seddar (M. SEDDAR)
         </p>
 
         <div style={sH}>H{"é"}bergement</div>
