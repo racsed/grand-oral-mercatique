@@ -1530,6 +1530,7 @@ function Det({ f, onClose, onOpenFiche, isFav, onToggleFav }) {
       <div onClick={e => e.stopPropagation()} style={{ position: "relative", background: "var(--sf)", borderRadius: 24, maxWidth: 640, width: "100%", maxHeight: "85vh", overflow: "auto", padding: 32, boxShadow: "0 25px 60px rgba(108,92,231,.2)", animation: "fu .3s ease" }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 5, background: c?.grad, borderRadius: "24px 24px 0 0" }} />
         <div style={{ position: "absolute", top: 16, right: 16, display: "flex", gap: 8 }}>
+          <button onClick={() => generatePDF([f])} title="Telecharger cette fiche en PDF" style={{ background: "#F0E8DD", border: "none", borderRadius: "50%", width: 34, height: 34, cursor: "pointer", fontSize: 16, display: "flex", alignItems: "center", justifyContent: "center", color: "var(--ink3)" }}>📥</button>
           {onToggleFav && <button onClick={() => onToggleFav(f.id)} style={{ background: "#F0E8DD", border: "none", borderRadius: "50%", width: 34, height: 34, cursor: "pointer", fontSize: 16, display: "flex", alignItems: "center", justifyContent: "center", color: isFav ? "#FDCB6E" : "var(--ink3)" }}>{isFav ? "\u2605" : "\u2606"}</button>}
           <button onClick={onClose} style={{ background: "#F0E8DD", border: "none", borderRadius: "50%", width: 34, height: 34, cursor: "pointer", fontSize: 16, display: "flex", alignItems: "center", justifyContent: "center", color: "var(--ink2)", fontWeight: 700 }}>{"\u2715"}</button>
         </div>
@@ -1691,7 +1692,10 @@ function generatePDF(fiches) {
     }
   });
 
-  doc.save("Grand_Oral_Mercatique_Fiches.pdf");
+  const filename = fiches.length === 1
+    ? `Fiche_${fiches[0].titre.replace(/[^a-zA-Z0-9\u00C0-\u024F ]/g, "").replace(/\s+/g, "_")}.pdf`
+    : "Grand_Oral_Mercatique_Fiches.pdf";
+  doc.save(filename);
 }
 
 function FavorisView({ favoris, onSelectFiche, onToggleFav }) {
