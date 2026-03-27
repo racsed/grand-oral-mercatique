@@ -1756,6 +1756,69 @@ function QRModal({ onClose }) {
 }
 
 /* ═══════════════════════════════════════════════════════════════
+   INFO MODAL
+   ═══════════════════════════════════════════════════════════════ */
+function InfoModal({ onClose }) {
+  const sH = { fontSize: 16, fontWeight: 700, color: "var(--ink)", marginTop: 20, marginBottom: 6 };
+  const sP = { fontSize: 14, color: "var(--ink2)", lineHeight: 1.65 };
+  return (
+    <div style={{ position: "fixed", inset: 0, zIndex: 1100, display: "flex", alignItems: "center", justifyContent: "center", padding: 16 }} onClick={onClose}>
+      <div style={{ position: "absolute", inset: 0, background: "rgba(26,26,46,.5)", backdropFilter: "blur(8px)" }} />
+      <div onClick={e => e.stopPropagation()} style={{ position: "relative", background: "var(--sf)", borderRadius: 24, maxWidth: 560, width: "100%", maxHeight: "85vh", overflow: "auto", padding: "36px 36px 32px", boxShadow: "0 25px 60px rgba(108,92,231,.2)", animation: "fu .3s ease" }}>
+        <button onClick={onClose} style={{ position: "absolute", top: 16, right: 16, background: "#F0E8DD", border: "none", borderRadius: "50%", width: 34, height: 34, cursor: "pointer", fontSize: 16, display: "flex", alignItems: "center", justifyContent: "center", color: "var(--ink2)", fontWeight: 700 }}>{"\u2715"}</button>
+
+        <h2 style={{ fontSize: 22, fontWeight: 800, color: "var(--ink)", marginBottom: 4 }}>INFORMATIONS</h2>
+
+        <div style={sH}>Editeur</div>
+        <p style={sP}>
+          Rachid Seddar (M. SEDDAR)<br />
+          Developpe avec l'aide de <em>Claude AI</em> (Anthropic).
+        </p>
+
+        <div style={sH}>Hebergement</div>
+        <p style={sP}>Netlify - serveur CDN mondial.</p>
+
+        <div style={sH}>Donnees personnelles & confidentialite</div>
+        <p style={sP}>
+          Cet outil ne collecte, ne transmet et ne traite <strong>aucune donnee personnelle</strong>.
+          Toutes les informations (historique de recherche, favoris, fiches consultees) sont
+          enregistrees <strong>uniquement en local</strong> dans votre navigateur via <code style={{ background: "#F0E8DD", padding: "2px 6px", borderRadius: 4, fontSize: 13 }}>localStorage</code> et ne quittent jamais votre appareil.
+        </p>
+        <p style={{ ...sP, marginTop: 8 }}>
+          Aucun cookie de tracage, aucune analytics, aucun serveur ne recoit vos donnees.
+        </p>
+
+        <div style={sH}>Utilisation</div>
+        <p style={sP}>
+          Outil gratuit, libre d'utilisation dans le cadre educatif. Aucune inscription requise.
+        </p>
+
+        <div style={sH}>Contenu pedagogique</div>
+        <p style={sP}>
+          Les 42 fiches concepts sont basees sur le programme officiel du Bulletin Officiel (BO) de Mercatique STMG
+          et le manuel Delagrave (16 chapitres de synthese). Le contenu est destine a la preparation du Grand Oral.
+        </p>
+
+        <div style={sH}>Licence</div>
+        <p style={sP}>
+          Ce site est publie sous licence <strong>Creative Commons BY-NC-SA 4.0</strong> : vous
+          pouvez le partager librement en citant l'auteur, sans usage commercial, et
+          en conservant la meme licence pour toute version modifiee.
+        </p>
+        <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 10 }}>
+          <div style={{ display: "flex", gap: 4 }}>
+            {["CC", "BY", "NC", "SA"].map(t => (
+              <span key={t} style={{ width: 28, height: 28, borderRadius: "50%", background: t === "CC" ? "#888" : "#E17055", color: "#fff", fontSize: 9, fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center" }}>{t}</span>
+            ))}
+          </div>
+          <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.fr" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: "var(--el)", fontWeight: 600 }}>CC BY-NC-SA 4.0</a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════
    APP
    ═══════════════════════════════════════════════════════════════ */
 export default function App() {
@@ -1765,6 +1828,7 @@ export default function App() {
   const [busy, setBusy] = useState(false);
   const [view, setView] = useState("home"); // home | explorer | favoris
   const [showQR, setShowQR] = useState(false);
+  const [showInfo, setShowInfo] = useState(false);
   const [hist, setHist] = useState(() => { try { return JSON.parse(window.localStorage?.getItem?.("go-h") || "[]"); } catch { return []; } });
   const [favoris, setFavoris] = useState(() => { try { return JSON.parse(window.localStorage?.getItem?.("go-favoris") || "[]"); } catch { return []; } });
   const [viewed, setViewed] = useState(() => { try { return JSON.parse(window.localStorage?.getItem?.("go-viewed") || "[]"); } catch { return []; } });
@@ -1867,6 +1931,7 @@ export default function App() {
               {"\u2605"} Favoris{favoris.length > 0 && <span style={{ background: "#FF6B6B", color: "#fff", fontSize: 10, fontWeight: 800, borderRadius: 10, padding: "1px 6px", marginLeft: 4 }}>{favoris.length}</span>}
             </button>
             <button onClick={() => setShowQR(true)} style={{ fontSize: 12, color: "var(--ink3)", background: "var(--sf)", padding: "6px 14px", borderRadius: 20, border: "1px solid var(--bd)", fontWeight: 600, cursor: "pointer" }}>📱 QR</button>
+            <button onClick={() => setShowInfo(true)} style={{ fontSize: 12, color: "var(--ink3)", background: "var(--sf)", padding: "6px 14px", borderRadius: 20, border: "1px solid var(--bd)", fontWeight: 600, cursor: "pointer" }}>ℹ️</button>
             <div style={{ fontSize: 11, color: "var(--ink3)", background: "var(--sf)", padding: "5px 14px", borderRadius: 20, border: "1px solid var(--bd)", fontWeight: 600 }}>M. SEDDAR</div>
           </div>
         </div>
@@ -1980,6 +2045,7 @@ export default function App() {
       {/* MODALS */}
       {sel && <Det f={sel} onClose={() => setSel(null)} onOpenFiche={openFiche} isFav={isFav(sel.id)} onToggleFav={toggleFav} />}
       {showQR && <QRModal onClose={() => setShowQR(false)} />}
+      {showInfo && <InfoModal onClose={() => setShowInfo(false)} />}
 
       {/* FOOTER */}
       <footer style={{ textAlign: "center", padding: "24px", fontSize: 12, color: "var(--ink3)", borderTop: "1px solid var(--bd)", position: "relative", zIndex: 1 }}>
