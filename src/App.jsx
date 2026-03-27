@@ -1928,7 +1928,6 @@ export default function App() {
             </button>
             <button onClick={() => setShowQR(true)} style={{ fontSize: 12, color: "var(--ink3)", background: "var(--sf)", padding: "6px 14px", borderRadius: 20, border: "1px solid var(--bd)", fontWeight: 600, cursor: "pointer" }}>📱 QR</button>
             <button onClick={() => setShowInfo(true)} style={{ fontSize: 12, color: "var(--ink3)", background: "var(--sf)", padding: "6px 14px", borderRadius: 20, border: "1px solid var(--bd)", fontWeight: 600, cursor: "pointer" }}>ℹ️</button>
-            <div style={{ fontSize: 11, color: "var(--ink3)", background: "var(--sf)", padding: "5px 14px", borderRadius: 20, border: "1px solid var(--bd)", fontWeight: 600 }}>M. SEDDAR</div>
           </div>
         </div>
       </header>
