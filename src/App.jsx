@@ -1927,7 +1927,6 @@ export default function App() {
               {"\u2605"} Favoris{favoris.length > 0 && <span style={{ background: "#FF6B6B", color: "#fff", fontSize: 10, fontWeight: 800, borderRadius: 10, padding: "1px 6px", marginLeft: 4 }}>{favoris.length}</span>}
             </button>
             <button onClick={() => setShowQR(true)} style={{ fontSize: 12, color: "var(--ink3)", background: "var(--sf)", padding: "6px 14px", borderRadius: 20, border: "1px solid var(--bd)", fontWeight: 600, cursor: "pointer" }}>📱 QR</button>
-            <button onClick={() => setShowInfo(true)} style={{ fontSize: 12, color: "var(--ink3)", background: "var(--sf)", padding: "6px 14px", borderRadius: 20, border: "1px solid var(--bd)", fontWeight: 600, cursor: "pointer" }}>ℹ️</button>
           </div>
         </div>
       </header>
@@ -2044,8 +2043,9 @@ export default function App() {
 
       {/* FOOTER */}
       <footer style={{ textAlign: "center", padding: "24px", fontSize: 12, color: "var(--ink3)", borderTop: "1px solid var(--bd)", position: "relative", zIndex: 1 }}>
-        Grand Oral Mercatique — Terminale STMG · {F.length} concepts · Programme officiel BO
-        {viewed.length > 0 && <span style={{ marginLeft: 12, color: "var(--el)", fontWeight: 600 }}>· {viewed.length} fiche{viewed.length > 1 ? "s" : ""} consultée{viewed.length > 1 ? "s" : ""}</span>}
+        <div>Grand Oral Mercatique — Terminale STMG · {F.length} concepts · Programme officiel BO
+        {viewed.length > 0 && <span style={{ marginLeft: 12, color: "var(--el)", fontWeight: 600 }}>· {viewed.length} fiche{viewed.length > 1 ? "s" : ""} consultée{viewed.length > 1 ? "s" : ""}</span>}</div>
+        <button onClick={() => setShowInfo(true)} style={{ background: "none", border: "none", color: "var(--ink3)", fontSize: 11, cursor: "pointer", marginTop: 6, textDecoration: "underline", opacity: 0.7 }}>Mentions légales & informations</button>
       </footer>
     </div>
   );
