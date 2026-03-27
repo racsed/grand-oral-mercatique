@@ -1698,15 +1698,24 @@ function generatePDF(fiches) {
   doc.save(filename);
 }
 
-function FavorisView({ favoris, onSelectFiche, onToggleFav }) {
+function FavorisView({ favoris, onSelectFiche, onToggleFav, onClearAll }) {
   const fiches = favoris.map(id => F.find(f => f.id === id)).filter(Boolean);
+  const [confirmClear, setConfirmClear] = useState(false);
   return (
     <div style={{ animation: "fu .4s ease" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24, flexWrap: "wrap", gap: 10 }}>
         <div>
           <div style={{ fontSize: 22, fontWeight: 800, color: "var(--ink)" }}>{"\u2605"} Mes favoris ({fiches.length} fiche{fiches.length > 1 ? "s" : ""})</div>
         </div>
-        {fiches.length > 0 && <button onClick={() => generatePDF(fiches)} style={{ padding: "10px 20px", fontSize: 13, fontWeight: 700, background: "linear-gradient(135deg,#6C5CE7,#A29BFE)", color: "#fff", border: "none", borderRadius: 14, cursor: "pointer", transition: "all .2s" }}>📥 Telecharger en PDF</button>}
+        <div style={{ display: "flex", gap: 8 }}>
+          {fiches.length > 0 && !confirmClear && <button onClick={() => setConfirmClear(true)} style={{ padding: "10px 20px", fontSize: 13, fontWeight: 700, background: "var(--sf)", color: "var(--co)", border: "2px solid var(--co)", borderRadius: 14, cursor: "pointer", transition: "all .2s" }}>Tout supprimer</button>}
+          {confirmClear && <div style={{ display: "flex", gap: 6, alignItems: "center", background: "#FFF0F0", padding: "8px 14px", borderRadius: 14, border: "2px solid var(--co)" }}>
+            <span style={{ fontSize: 13, fontWeight: 600, color: "var(--co)" }}>Supprimer les {fiches.length} favoris ?</span>
+            <button onClick={() => { onClearAll(); setConfirmClear(false); }} style={{ padding: "6px 14px", fontSize: 12, fontWeight: 700, background: "var(--co)", color: "#fff", border: "none", borderRadius: 10, cursor: "pointer" }}>Oui, supprimer</button>
+            <button onClick={() => setConfirmClear(false)} style={{ padding: "6px 14px", fontSize: 12, fontWeight: 700, background: "var(--sf)", color: "var(--ink2)", border: "1px solid var(--bd)", borderRadius: 10, cursor: "pointer" }}>Annuler</button>
+          </div>}
+          {fiches.length > 0 && <button onClick={() => generatePDF(fiches)} style={{ padding: "10px 20px", fontSize: 13, fontWeight: 700, background: "linear-gradient(135deg,#6C5CE7,#A29BFE)", color: "#fff", border: "none", borderRadius: 14, cursor: "pointer", transition: "all .2s" }}>📥 Telecharger en PDF</button>}
+        </div>
       </div>
       {fiches.length === 0 ? (
         <div style={{ background: "var(--sf)", borderRadius: 20, padding: "48px 24px", textAlign: "center", border: "1px solid var(--bd)" }}>
@@ -1769,6 +1778,10 @@ export default function App() {
     });
   }, []);
   const isFav = useCallback(id => favoris.includes(id), [favoris]);
+  const clearAllFavoris = useCallback(() => {
+    setFavoris([]);
+    try { window.localStorage?.setItem?.("go-favoris", "[]"); } catch {}
+  }, []);
 
   const trackView = useCallback(id => {
     setViewed(prev => {
@@ -1866,7 +1879,7 @@ export default function App() {
         {view === "explorer" && <Explorer onSelectFiche={openFiche} isFav={isFav} onToggleFav={toggleFav} />}
 
         {/* FAVORIS VIEW */}
-        {view === "favoris" && <FavorisView favoris={favoris} onSelectFiche={openFiche} onToggleFav={toggleFav} />}
+        {view === "favoris" && <FavorisView favoris={favoris} onSelectFiche={openFiche} onToggleFav={toggleFav} onClearAll={clearAllFavoris} />}
 
         {/* HOME VIEW */}
         {showHome && <>
