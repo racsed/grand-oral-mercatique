@@ -1496,7 +1496,7 @@ function Card({ f, i, onClick, isFav, onToggleFav }) {
       <p style={{ fontSize: 13, color: "var(--ink2)", lineHeight: 1.55, flex: 1 }}>{f.explicationSimple.length > 150 ? f.explicationSimple.slice(0, 150) + "..." : f.explicationSimple}</p>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <div style={{ fontSize: 11, color: "var(--ink3)", fontWeight: 500 }}>{f.question} · {f.sousTheme}</div>
-        {linkCount > 0 && <div style={{ fontSize: 11, color: "var(--el)", fontWeight: 600 }}>🔗 {linkCount} concepts lies</div>}
+        {linkCount > 0 && <div style={{ fontSize: 11, color: "var(--el)", fontWeight: 600 }}>🔗 {linkCount} concepts li\u00e9s</div>}
       </div>
     </div>
   );
@@ -1530,7 +1530,7 @@ function Det({ f, onClose, onOpenFiche, isFav, onToggleFav }) {
       <div onClick={e => e.stopPropagation()} style={{ position: "relative", background: "var(--sf)", borderRadius: 24, maxWidth: 640, width: "100%", maxHeight: "85vh", overflow: "auto", padding: 32, boxShadow: "0 25px 60px rgba(108,92,231,.2)", animation: "fu .3s ease" }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 5, background: c?.grad, borderRadius: "24px 24px 0 0" }} />
         <div style={{ position: "absolute", top: 16, right: 16, display: "flex", gap: 8 }}>
-          <button onClick={() => generatePDF([f])} title="Telecharger cette fiche en PDF" style={{ background: "#F0E8DD", border: "none", borderRadius: "50%", width: 34, height: 34, cursor: "pointer", fontSize: 16, display: "flex", alignItems: "center", justifyContent: "center", color: "var(--ink3)" }}>📥</button>
+          <button onClick={() => generatePDF([f])} title="T\u00e9l\u00e9charger cette fiche en PDF" style={{ background: "#F0E8DD", border: "none", borderRadius: "50%", width: 34, height: 34, cursor: "pointer", fontSize: 16, display: "flex", alignItems: "center", justifyContent: "center", color: "var(--ink3)" }}>📥</button>
           {onToggleFav && <button onClick={() => onToggleFav(f.id)} style={{ background: "#F0E8DD", border: "none", borderRadius: "50%", width: 34, height: 34, cursor: "pointer", fontSize: 16, display: "flex", alignItems: "center", justifyContent: "center", color: isFav ? "#FDCB6E" : "var(--ink3)" }}>{isFav ? "\u2605" : "\u2606"}</button>}
           <button onClick={onClose} style={{ background: "#F0E8DD", border: "none", borderRadius: "50%", width: 34, height: 34, cursor: "pointer", fontSize: 16, display: "flex", alignItems: "center", justifyContent: "center", color: "var(--ink2)", fontWeight: 700 }}>{"\u2715"}</button>
         </div>
@@ -1560,10 +1560,10 @@ function Det({ f, onClose, onOpenFiche, isFav, onToggleFav }) {
         {/* MAILLAGE 3 NIVEAUX */}
         <div style={{ marginBottom: 18 }}>
           <div style={{ fontSize: 14, fontWeight: 700, color: c?.color, marginBottom: 10 }}>🔗 Maillage des concepts</div>
-          {renderLinks(f.prerequis, "#FDCB6E", "Prerequis — a connaitre avant")}
-          {renderLinks(f.complementaires, "#6C5CE7", "Complementaires — meme niveau")}
-          {renderLinks(f.prolongements, "#00D2A0", "Prolongements — pour aller plus loin")}
-          {(!f.prerequis?.length && !f.complementaires?.length && !f.prolongements?.length) && <div style={{ fontSize: 13, color: "var(--ink3)" }}>Concept fondamental, pas de prerequis specifiques.</div>}
+          {renderLinks(f.prerequis, "#FDCB6E", "Pr\u00e9requis \u2014 \u00e0 conna\u00eetre avant")}
+          {renderLinks(f.complementaires, "#6C5CE7", "Compl\u00e9mentaires \u2014 m\u00eame niveau")}
+          {renderLinks(f.prolongements, "#00D2A0", "Prolongements \u2014 pour aller plus loin")}
+          {(!f.prerequis?.length && !f.complementaires?.length && !f.prolongements?.length) && <div style={{ fontSize: 13, color: "var(--ink3)" }}>Concept fondamental, pas de pr\u00e9requis sp\u00e9cifiques.</div>}
         </div>
       </div>
     </div>
@@ -1581,9 +1581,9 @@ function Explorer({ onSelectFiche, isFav, onToggleFav }) {
   const [filter, setFilter] = useState("all");
   const themes = [
     { key: "all", label: "Tous", icon: "🎓" },
-    { key: "theme1", label: "Theme 1", icon: "📦" },
-    { key: "theme2", label: "Theme 2", icon: "🚚" },
-    { key: "theme3", label: "Theme 3", icon: "📢" },
+    { key: "theme1", label: "Th\u00e8me 1", icon: "📦" },
+    { key: "theme2", label: "Th\u00e8me 2", icon: "🚚" },
+    { key: "theme3", label: "Th\u00e8me 3", icon: "📢" },
   ];
   const filtered = filter === "all" ? F : F.filter(f => f.theme === filter);
   const grouped = {};
@@ -1597,7 +1597,7 @@ function Explorer({ onSelectFiche, isFav, onToggleFav }) {
     <div style={{ animation: "fu .4s ease" }}>
       <div style={{ textAlign: "center", marginBottom: 24 }}>
         <div style={{ fontSize: 24, fontWeight: 800, color: "var(--ink)", marginBottom: 8 }}>🗺️ Carte des concepts</div>
-        <div style={{ fontSize: 14, color: "var(--ink2)" }}>{F.length} concepts organises par theme et question</div>
+        <div style={{ fontSize: 14, color: "var(--ink2)" }}>{F.length} concepts organis\u00e9s par th\u00e8me et question</div>
       </div>
       <div style={{ display: "flex", justifyContent: "center", gap: 8, marginBottom: 28, flexWrap: "wrap" }}>
         {themes.map(t => (
@@ -1659,7 +1659,7 @@ function generatePDF(fiches) {
   };
 
   addText("Grand Oral Mercatique - Mes fiches de revision", 18, "bold", [108, 92, 231]);
-  addText("Genere le " + new Date().toLocaleDateString("fr-FR"), 10, "normal", [136, 136, 168]);
+  addText("G\u00e9n\u00e9r\u00e9 le " + new Date().toLocaleDateString("fr-FR"), 10, "normal", [136, 136, 168]);
   y += 8;
 
   fiches.forEach((f, idx) => {
@@ -1714,7 +1714,7 @@ function FavorisView({ favoris, onSelectFiche, onToggleFav, onClearAll }) {
             <button onClick={() => { onClearAll(); setConfirmClear(false); }} style={{ padding: "6px 14px", fontSize: 12, fontWeight: 700, background: "var(--co)", color: "#fff", border: "none", borderRadius: 10, cursor: "pointer" }}>Oui, supprimer</button>
             <button onClick={() => setConfirmClear(false)} style={{ padding: "6px 14px", fontSize: 12, fontWeight: 700, background: "var(--sf)", color: "var(--ink2)", border: "1px solid var(--bd)", borderRadius: 10, cursor: "pointer" }}>Annuler</button>
           </div>}
-          {fiches.length > 0 && <button onClick={() => generatePDF(fiches)} style={{ padding: "10px 20px", fontSize: 13, fontWeight: 700, background: "linear-gradient(135deg,#6C5CE7,#A29BFE)", color: "#fff", border: "none", borderRadius: 14, cursor: "pointer", transition: "all .2s" }}>📥 Telecharger en PDF</button>}
+          {fiches.length > 0 && <button onClick={() => generatePDF(fiches)} style={{ padding: "10px 20px", fontSize: 13, fontWeight: 700, background: "linear-gradient(135deg,#6C5CE7,#A29BFE)", color: "#fff", border: "none", borderRadius: 14, cursor: "pointer", transition: "all .2s" }}>📥 T\u00e9l\u00e9charger en PDF</button>}
         </div>
       </div>
       {fiches.length === 0 ? (
@@ -1769,41 +1769,41 @@ function InfoModal({ onClose }) {
 
         <h2 style={{ fontSize: 22, fontWeight: 800, color: "var(--ink)", marginBottom: 4 }}>INFORMATIONS</h2>
 
-        <div style={sH}>Editeur</div>
+        <div style={sH}>{"\u00c9"}diteur</div>
         <p style={sP}>
           Rachid Seddar (M. SEDDAR)<br />
-          Developpe avec l'aide de <em>Claude AI</em> (Anthropic).
+          D{"\u00e9"}velopp{"\u00e9"} avec l'aide de <em>Claude AI</em> (Anthropic).
         </p>
 
-        <div style={sH}>Hebergement</div>
+        <div style={sH}>H{"\u00e9"}bergement</div>
         <p style={sP}>Netlify - serveur CDN mondial.</p>
 
-        <div style={sH}>Donnees personnelles & confidentialite</div>
+        <div style={sH}>Donn{"\u00e9"}es personnelles & confidentialit{"\u00e9"}</div>
         <p style={sP}>
-          Cet outil ne collecte, ne transmet et ne traite <strong>aucune donnee personnelle</strong>.
-          Toutes les informations (historique de recherche, favoris, fiches consultees) sont
-          enregistrees <strong>uniquement en local</strong> dans votre navigateur via <code style={{ background: "#F0E8DD", padding: "2px 6px", borderRadius: 4, fontSize: 13 }}>localStorage</code> et ne quittent jamais votre appareil.
+          Cet outil ne collecte, ne transmet et ne traite <strong>aucune donn{"\u00e9"}e personnelle</strong>.
+          Toutes les informations (historique de recherche, favoris, fiches consult{"\u00e9"}es) sont
+          enregistr{"\u00e9"}es <strong>uniquement en local</strong> dans votre navigateur via <code style={{ background: "#F0E8DD", padding: "2px 6px", borderRadius: 4, fontSize: 13 }}>localStorage</code> et ne quittent jamais votre appareil.
         </p>
         <p style={{ ...sP, marginTop: 8 }}>
-          Aucun cookie de tracage, aucune analytics, aucun serveur ne recoit vos donnees.
+          Aucun cookie de tra{"\u00e7"}age, aucune analytics, aucun serveur ne re{"\u00e7"}oit vos donn{"\u00e9"}es.
         </p>
 
         <div style={sH}>Utilisation</div>
         <p style={sP}>
-          Outil gratuit, libre d'utilisation dans le cadre educatif. Aucune inscription requise.
+          Outil gratuit, libre d'utilisation dans le cadre {"\u00e9"}ducatif. Aucune inscription requise.
         </p>
 
-        <div style={sH}>Contenu pedagogique</div>
+        <div style={sH}>Contenu p{"\u00e9"}dagogique</div>
         <p style={sP}>
-          Les 42 fiches concepts sont basees sur le programme officiel du Bulletin Officiel (BO) de Mercatique STMG
-          et le manuel Delagrave (16 chapitres de synthese). Le contenu est destine a la preparation du Grand Oral.
+          Les 42 fiches concepts sont bas{"\u00e9"}es sur le programme officiel du Bulletin Officiel (BO) de Mercatique STMG
+          et le manuel Delagrave (16 chapitres de synth{"\u00e8"}se). Le contenu est destin{"\u00e9"} {"\u00e0"} la pr{"\u00e9"}paration du Grand Oral.
         </p>
 
         <div style={sH}>Licence</div>
         <p style={sP}>
-          Ce site est publie sous licence <strong>Creative Commons BY-NC-SA 4.0</strong> : vous
+          Ce site est publi{"\u00e9"} sous licence <strong>Creative Commons BY-NC-SA 4.0</strong> : vous
           pouvez le partager librement en citant l'auteur, sans usage commercial, et
-          en conservant la meme licence pour toute version modifiee.
+          en conservant la m{"\u00eame"} licence pour toute version modifi{"\u00e9"}e.
         </p>
         <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 10 }}>
           <div style={{ display: "flex", gap: 4 }}>
@@ -1949,14 +1949,14 @@ export default function App() {
         {/* HOME VIEW */}
         {showHome && <>
           {!res && <div style={{ textAlign: "center", marginBottom: 40, animation: "fu .5s ease" }}>
-            <div style={{ display: "inline-block", background: "linear-gradient(135deg,#6C5CE7,#FD79A8,#FDCB6E)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", fontSize: 11, fontWeight: 800, textTransform: "uppercase", letterSpacing: ".15em", marginBottom: 12 }}>Prepare ton epreuve</div>
-            <h1 style={{ fontSize: 34, fontWeight: 900, color: "var(--ink)", lineHeight: 1.15, marginBottom: 10 }}>Entre ta question,<br />decouvre les <span style={{ color: "var(--el)" }}>concepts cles</span></h1>
-            <p style={{ fontSize: 16, color: "var(--ink2)", maxWidth: 500, margin: "0 auto" }}>Analyse intelligente des notions, mecanismes et exemples du programme de Mercatique</p>
+            <div style={{ display: "inline-block", background: "linear-gradient(135deg,#6C5CE7,#FD79A8,#FDCB6E)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", fontSize: 11, fontWeight: 800, textTransform: "uppercase", letterSpacing: ".15em", marginBottom: 12 }}>Pr\u00e9pare ton \u00e9preuve</div>
+            <h1 style={{ fontSize: 34, fontWeight: 900, color: "var(--ink)", lineHeight: 1.15, marginBottom: 10 }}>Entre ta question,<br />d\u00e9couvre les <span style={{ color: "var(--el)" }}>concepts cl\u00e9s</span></h1>
+            <p style={{ fontSize: 16, color: "var(--ink2)", maxWidth: 500, margin: "0 auto" }}>Analyse intelligente des notions, m\u00e9canismes et exemples du programme de Mercatique</p>
           </div>}
 
           <div style={{ display: "flex", gap: 10, marginBottom: res ? 10 : 28, animation: "fu .4s ease .1s both" }}>
             <div style={{ flex: 1 }}>
-              <input ref={iR} type="text" value={q} onChange={e => setQ(e.target.value)} onKeyDown={e => e.key === "Enter" && go()} placeholder="Entre ta question ici... (Ctrl+K)" style={{ width: "100%", padding: "15px 22px", fontSize: 15, border: "2px solid var(--bd)", borderRadius: 16, background: "var(--sf)", color: "var(--ink)", fontWeight: 500, transition: "border-color .2s" }} onFocus={e => e.target.style.borderColor = "var(--el)"} onBlur={e => e.target.style.borderColor = "var(--bd)"} />
+              <input ref={iR} type="text" value={q} onChange={e => setQ(e.target.value)} onKeyDown={e => e.key === "Enter" && go()} placeholder="Entre ta question ici..." style={{ width: "100%", padding: "15px 22px", fontSize: 15, border: "2px solid var(--bd)", borderRadius: 16, background: "var(--sf)", color: "var(--ink)", fontWeight: 500, transition: "border-color .2s" }} onFocus={e => e.target.style.borderColor = "var(--el)"} onBlur={e => e.target.style.borderColor = "var(--bd)"} />
             </div>
             <button onClick={() => go()} disabled={!q.trim() || busy} style={{ padding: "15px 30px", background: q.trim() ? "linear-gradient(135deg,#6C5CE7,#A29BFE)" : "#DDD", color: "#fff", border: "none", borderRadius: 16, fontWeight: 700, fontSize: 14, cursor: q.trim() ? "pointer" : "default", transition: "all .2s", whiteSpace: "nowrap", opacity: busy ? 0.7 : 1, minWidth: 120 }}>
               {busy ? <LoadDots /> : "Analyser 🔍"}
@@ -1994,9 +1994,9 @@ export default function App() {
           </div>
           {/* Theme counter */}
           {themeCount && <div style={{ marginTop: 10, display: "flex", flexWrap: "wrap", gap: 12, fontSize: 12, color: "var(--ink3)" }}>
-            {themeCount.theme1 > 0 && <span>📦 {themeCount.theme1} Theme 1</span>}
-            {themeCount.theme2 > 0 && <span>🚚 {themeCount.theme2} Theme 2</span>}
-            {themeCount.theme3 > 0 && <span>📢 {themeCount.theme3} Theme 3</span>}
+            {themeCount.theme1 > 0 && <span>📦 {themeCount.theme1} Th\u00e8me 1</span>}
+            {themeCount.theme2 > 0 && <span>🚚 {themeCount.theme2} Th\u00e8me 2</span>}
+            {themeCount.theme3 > 0 && <span>📢 {themeCount.theme3} Th\u00e8me 3</span>}
           </div>}
         </div>
 
@@ -2010,7 +2010,7 @@ export default function App() {
           </div>
         </> : <div style={{ background: "var(--sf)", borderRadius: 20, padding: "48px 24px", textAlign: "center", border: "1px solid var(--bd)", marginBottom: 24 }}>
           <div style={{ fontSize: 36, marginBottom: 12 }}>🤔</div>
-          <div style={{ fontSize: 15, color: "var(--ink2)" }}>Aucun concept trouve. Reformule avec des termes du programme Mercatique.</div>
+          <div style={{ fontSize: 15, color: "var(--ink2)" }}>Aucun concept trouv\u00e9. Reformule avec des termes du programme Mercatique.</div>
         </div>}
 
         {res.secondaires.length > 0 && <>
@@ -2050,7 +2050,7 @@ export default function App() {
       {/* FOOTER */}
       <footer style={{ textAlign: "center", padding: "24px", fontSize: 12, color: "var(--ink3)", borderTop: "1px solid var(--bd)", position: "relative", zIndex: 1 }}>
         Grand Oral Mercatique — Terminale STMG · {F.length} concepts · Programme officiel BO
-        {viewed.length > 0 && <span style={{ marginLeft: 12, color: "var(--el)", fontWeight: 600 }}>· {viewed.length} fiche{viewed.length > 1 ? "s" : ""} consultee{viewed.length > 1 ? "s" : ""}</span>}
+        {viewed.length > 0 && <span style={{ marginLeft: 12, color: "var(--el)", fontWeight: 600 }}>· {viewed.length} fiche{viewed.length > 1 ? "s" : ""} consult\u00e9e{viewed.length > 1 ? "s" : ""}</span>}
       </footer>
     </div>
   );
